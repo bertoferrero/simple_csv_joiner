@@ -104,7 +104,14 @@ def fix_row(row:list[str], commadecimal: bool):
     # Remove leading and trailing whitespace from each element in the row
     if commadecimal:
         for i, value in enumerate(row):
-            if value.replace('.', '', 1).isdigit() and '.' in value:
-                row[i] = value.replace('.', ',')
+            try:
+                # Attempt to parse the value as a float
+                float(value)
+                # Replace '.' with ',' if it's a decimal number
+                if '.' in value or 'E' in value.upper():
+                    row[i] = value.replace('.', ',')
+            except ValueError:
+                # Skip values that cannot be parsed as float
+                pass
 
     return row
