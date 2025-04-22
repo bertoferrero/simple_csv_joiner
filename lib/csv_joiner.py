@@ -62,15 +62,15 @@ def join_csv_from_list(input_csv_files: list[str], output_file: str, delimiter: 
     #Check parameters values        
     output_dir = os.path.dirname(output_file)
     if output_dir and not os.path.exists(output_dir):
-        raise ValueError(f"Defined ouput path does not exists: {output_dir}")
+        raise ValueError(f"Defined output path does not exist: {output_dir}")
     if os.path.exists(output_file):
-        raise ValueError(f"Ouput file already exists: {output_file}")
+        raise ValueError(f"Output file already exists: {output_file}")
     
     if len(input_csv_files) == 0:
         raise ValueError("Input csv files list is empty")
     for input_file in input_csv_files:
         if not (os.path.exists(input_file) and os.path.isfile(input_file)):
-            raise ValueError(f"This file does not exists: {input_file}")
+            raise ValueError(f"This file does not exist: {input_file}")
         
     
     #Read and combine all csv files
