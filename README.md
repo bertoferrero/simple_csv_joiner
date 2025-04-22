@@ -1,12 +1,13 @@
 # Simple CSV Joiner
 
-Simple CSV Joiner is a Python tool designed to merge multiple CSV files into a single file. It provides options to specify delimiters and handle decimal formats, making it a flexible solution for combining CSV data.
+Simple CSV Joiner is a Python tool designed to merge multiple CSV files into a single file. It provides options to specify delimiters and handle decimal formats, making it a flexible solution for combining CSV data. The project is specifically designed to handle large CSV files efficiently, processing input line by line and using a buffered writer to avoid memory overload.
 
 ## Features
 - Merge all CSV files from a directory or a list of files.
 - Retain the header from the first file and ignore headers from subsequent files.
 - Support for custom delimiters.
 - Option to transform decimal numbers from `3.55` to `3,55`.
+- Efficient memory usage: processes input line by line and employs a buffered writer.
 
 ## Requirements
 - Python 3.9 or higher
