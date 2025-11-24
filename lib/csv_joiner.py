@@ -19,7 +19,7 @@ import csv
 from lib.bufferedcsvfilewriter import BufferedCsvFileWriter
 
 
-def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, commadecimal: bool):
+def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, commadecimal: bool, dump_file_column: str = None):
     """
     Join all the csv files from a directory into a single csv file.
     The first row of the first file will be used as header. The rest of the files will be appended to it.
@@ -30,6 +30,7 @@ def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, comma
         output_file (str): Path to the output file.
         delimiter (str): Delimiter used in the csv files.
         commadecimal (bool): If True, transform decimal numbers from 3.55 to 3,55.
+        dump_file_column (str, optional): If specified, dump the filename in the given column.
 
     """
     #Check if the input folder exists
@@ -42,9 +43,9 @@ def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, comma
         raise ValueError("No csv file has been found in the input directory")
 
     #Request to join all of them
-    join_csv_from_list(csv_files, output_file, delimiter, commadecimal)
+    join_csv_from_list(csv_files, output_file, delimiter, commadecimal, dump_file_column)
 
-def join_csv_from_list(input_csv_files: list[str], output_file: str, delimiter: str, commadecimal: bool):
+def join_csv_from_list(input_csv_files: list[str], output_file: str, delimiter: str, commadecimal: bool, dump_file_column: str = None):
 
     """
     Join all the csv files from a list into a single csv file.
@@ -56,6 +57,7 @@ def join_csv_from_list(input_csv_files: list[str], output_file: str, delimiter: 
         output_file (str): Path to the output file.
         delimiter (str): Delimiter used in the csv files.
         commadecimal (bool): If True, transform decimal numbers from 3.55 to 3,55.
+        dump_file_column (str, optional): If specified, dump the filename in the given column.
 
     """
 
@@ -85,6 +87,14 @@ def join_csv_from_list(input_csv_files: list[str], output_file: str, delimiter: 
                     continue
                 csv_header = False
                 row = fix_row(row, commadecimal=commadecimal)
+                # Include the filename into the specified column
+                if dump_file_column is not None:
+                    if i == 0:
+                        row.append(dump_file_column)
+                    else:
+                        file_name = os.path.basename(input_file).replace(".csv", "")
+                        row.append(file_name)
+                # Write the line
                 csv_writter.write(row)
     csv_writter.close()
 

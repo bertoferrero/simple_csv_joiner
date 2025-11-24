@@ -42,8 +42,14 @@ def main():
         help='Transform decimal numbers from 3.55 to 3,55',
         default=False
     )
+    parser.add_argument(
+        '--dump_file_column',
+        type=str,
+        help='Dump the filename in the specified column',
+        default=None
+    )
     args = parser.parse_args()
-    join_csv_from_folder(args.inputdir, args.outputfile, args.delimiter, args.commadecimal)
+    join_csv_from_folder(args.inputdir, args.outputfile, args.delimiter, args.commadecimal, args.dump_file_column)
     
 
 if __name__ == "__main__":
