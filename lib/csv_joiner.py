@@ -19,7 +19,7 @@ import csv
 from lib.bufferedcsvfilewriter import BufferedCsvFileWriter
 
 
-def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, commadecimal: bool, dump_file_column: str = None):
+def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, commadecimal: bool, dump_file_column: str = None, file_pattern: str = None):
     """
     Join all the csv files from a directory into a single csv file.
     The first row of the first file will be used as header. The rest of the files will be appended to it.
@@ -31,14 +31,18 @@ def join_csv_from_folder(input_dir: str, output_file: str, delimiter: str, comma
         delimiter (str): Delimiter used in the csv files.
         commadecimal (bool): If True, transform decimal numbers from 3.55 to 3,55.
         dump_file_column (str, optional): If specified, dump the filename in the given column.
+        file_pattern (str, optional): If specified, only files matching the pattern will be joined.
 
     """
     #Check if the input folder exists
     if not os.path.isdir(input_dir):
         raise ValueError(f"Defined input path does not exists: {input_dir}")
     
+    if file_pattern is None:
+        file_pattern = "*.csv"
+    
     #List all the csv files from that directory
-    csv_files = glob.glob(os.path.join(input_dir, "*.csv"))
+    csv_files = glob.glob(os.path.join(input_dir, file_pattern))
     if len(csv_files) == 0:
         raise ValueError("No csv file has been found in the input directory")
 

@@ -26,6 +26,12 @@ def main():
         required=True
     )
     parser.add_argument(
+        '--file_pattern',
+        type=str,
+        help='Pattern to match files in the input directory',
+        default=None
+    )
+    parser.add_argument(
         '--outputfile',
         type=str,
         help='Output file',
@@ -49,7 +55,7 @@ def main():
         default=None
     )
     args = parser.parse_args()
-    join_csv_from_folder(args.inputdir, args.outputfile, args.delimiter, args.commadecimal, args.dump_file_column)
+    join_csv_from_folder(args.inputdir, args.outputfile, args.delimiter, args.commadecimal, args.dump_file_column, args.file_pattern)
     
 
 if __name__ == "__main__":
