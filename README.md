@@ -25,7 +25,7 @@ cd simple_csv_joiner
 ### Command Line Interface
 Run the script using the command line:
 ```bash
-python main.py --inputdir <input_directory> --outputfile <output_file> [--delimiter <delimiter>] [--commadecimal <True/False>] [--dump_file_column <column_name>]
+python main.py --inputdir <input_directory> --outputfile <output_file> [--delimiter <delimiter>] [--commadecimal <True/False>] [--dump_file_column <column_name>] [--file_pattern <file_pattern>]
 ```
 
 #### Arguments
@@ -34,6 +34,7 @@ python main.py --inputdir <input_directory> --outputfile <output_file> [--delimi
 - `--delimiter` (optional): Delimiter used in the CSV files. Default is `,`.
 - `--commadecimal` (optional): Transform decimal numbers from `3.55` to `3,55`. Default is `False`.
 - `--dump_file_column` (optional): Include the source filename (without .csv extension) in the specified column name.
+- `--file_pattern` (optional): File pattern to be located into the inputdir. If is not defined, "*.csv" is used.
 
 ### Examples
 
